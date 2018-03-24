@@ -1,0 +1,85 @@
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Weather</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+       
+        <div id="current-weather-details">
+            <ul>
+                <li id="current-humidity">--</li>
+                <li id="current-pressure">--</li>
+                <li id="current-temperature">--</li>
+                <li id="current-wind-speed">--</li>
+            </ul>
+            <button id="getWeather" onclick="getWeather()">Get Current Weather</button>
+        </div>
+        <p id="weather-summary"></p>
+        
+
+        <script>
+             var humidity, pressure, temperature, windSpeed, weatherSummary, object;
+    /**************/
+            function element(id) {
+                return document.getElementById(id);
+            }
+    /**************/
+            window.onload = function () {
+                humidity = element('current-humidity');
+                pressure = element('current-pressure');
+                temperature = element('current-temperature');
+                windSpeed = element('current-wind-speed');
+                weatherSummary = element('weather-summary');
+            };
+    /**************/
+            function getWeather() {
+                if(navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var lat = position.coords.latitude,
+                            long = position.coords.longitude;
+    //                    console.log(lat);
+    //                    console.log(long);
+                        showWeather(lat, long);
+                    });
+                } else {
+                    alert('Could not get your location');
+                }
+            }
+    /**************/
+            function showWeather(lat, long) {
+                var url = `https://api.darksky.net/forecast/f672ff13193bfcc40427a678ebfdbc71/${lat},${long}?format=jsonp&callback=displayWeather`,
+                    script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = url;
+                document.getElementsByTagName('head')[0].appendChild(script);
+                
+    //          displayWeather(object);         
+            }
+    /**************/
+            function displayWeather(object) {
+               console.log(object.timezone);
+                humidity.innerText = 'Влажность: ' + humidityPercentage(object.currently.humidity) + '%';
+                pressure.innerText = 'Давление: ' + pressurePercentage(object.currently.pressure) + ' мм.рт.ст';
+                temperature.innerHTML = 'Температура: ' + temperaturePercentage(object.currently.temperature) + ' &#176;C';
+                windSpeed.innerHTML = 'Скорость ветра: ' + windSpeedPercentage(object.currently.windSpeed) + ' м/с';
+            }
+    /**************/
+            function humidityPercentage(k) {
+                return Math.round(k * 100);
+            }
+            function pressurePercentage(k) {
+                return (k * 0.750063755419211).toFixed(1);
+            }
+            function temperaturePercentage(k) {
+                return ((k - 32) / 1.8).toFixed(2);
+            }
+            function windSpeedPercentage(k) {
+                return Math.round(k * 1.60934);
+            }
+    /**************/
+        </script>
+        
+    </body>
+    </html>
