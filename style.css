@@ -1,5 +1,6 @@
 body {
-    background: url(https://orig13.deviantart.net/64e8/f/2010/230/0/6/skies_of_blue_by_naturedrop.jpg);
+    background: url(https://i.pinimg.com/originals/c9/eb/b4/c9ebb42fa608684a7e205ae76fe9a13e.gif);
+    background-size: 100%;
 }
 
 #current-weather-details {
@@ -41,7 +42,7 @@ ul li {
 #getWeather:hover {
     background-color: hsla(216, 100%, 60%, 0.8);
     color: #FFFFFF;
-    border: 3px solid #FFFFFF;
+/*    border: 3px solid #FFFFFF;*/
     border-radius: 5px;
 }
 
