@@ -59,11 +59,12 @@
             }
     /**************/
             function displayWeather(object) {
-               console.log(object.timezone);
+               console.log(object);
                 humidity.innerText = 'Влажность: ' + humidityPercentage(object.currently.humidity) + '%';
                 pressure.innerText = 'Давление: ' + pressurePercentage(object.currently.pressure) + ' мм.рт.ст';
                 temperature.innerHTML = 'Температура: ' + temperaturePercentage(object.currently.temperature) + ' &#176;C';
-                windSpeed.innerHTML = 'Скорость ветра: ' + windSpeedPercentage(object.currently.windSpeed) + ' м/с';
+                windSpeed.innerText = 'Скорость ветра: ' + windSpeedPercentage(object.currently.windSpeed) + ' м/с';
+                weatherSummary.innerText = 'Регион: ' + object.timezone + ' Статус: ' + object.currently.summary;
             }
     /**************/
             function humidityPercentage(k) {
