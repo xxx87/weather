@@ -1,3 +1,3 @@
 # Weather
 
-A simple script to get the weather from the current location
+A simple script to get the weather from the current location!
